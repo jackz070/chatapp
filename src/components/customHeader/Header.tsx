@@ -3,6 +3,7 @@ import { ChatBubbleLeftRightIcon, PhoneIcon } from "@heroicons/react/24/solid";
 import { ChatHeaderProps } from "react-chat-engine-advanced";
 
 const Header = ({ chat }: { chat: ChatHeaderProps }) => {
+  console.log("🚀 ~ file: index.tsx:6 ~ Header ~ chat:", chat);
   return (
     <div className="chat-header">
       <div className="flexbetween">
@@ -11,7 +12,12 @@ const Header = ({ chat }: { chat: ChatHeaderProps }) => {
       </div>
       <div className="flexbetween">
         <PhoneIcon className="icon-phone" />
-        <p className="header-text">{chat.description}</p>
+        {/* Hackish temporary solution for default value that displays in an ugly way*/}
+        {chat.description !== "⬅️ ⬅️ ⬅️" ? (
+          <p className="header-text">{chat.description}</p>
+        ) : (
+          <p className="header-text">No chat selected</p>
+        )}
       </div>
     </div>
   );
