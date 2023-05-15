@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import MessageFormUi from "./MessageFormUi";
 import { usePostAiTextMutation } from "../../state/api";
 import { CustomChatFormProps } from "./CustomChatFormProps";
+import { MessageObject } from "react-chat-engine-advanced";
 
-const Ai = ({ props, activeChat }: CustomChatFormProps) => {
+const Ai = ({ props, activeChat, messageHistory }: CustomChatFormProps) => {
   const [message, setMessage] = useState("");
-  const [attachment, setAttachment] = useState("");
+  const [attachment, setAttachment] = useState<File | null>(null);
   const [trigger] = usePostAiTextMutation();
 
-  const handleChange = (e) => setMessage(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setMessage(e.target.value);
 
   const handleSubmit = async () => {
     const date = new Date()
@@ -22,13 +24,15 @@ const Ai = ({ props, activeChat }: CustomChatFormProps) => {
       sender_username: props.username,
       text: message,
       activeChatId: activeChat.id,
+      messageHistory: messageHistory,
     };
 
-    props.onSubmit(form);
+    props.onSubmit && props.onSubmit(form as unknown as MessageObject);
     trigger(form);
     setMessage("");
-    setAttachment("");
+    setAttachment(null);
   };
+
   return (
     <MessageFormUi
       setAttachment={setAttachment}

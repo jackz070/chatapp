@@ -1,14 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { usePostLoginMutation, usePostSignupMutation } from "../../state/api";
-import { setServers } from "dns";
+import { log } from "console";
 
 interface LoginProps {
   setUser: React.Dispatch<React.SetStateAction<string>>;
   setSecret: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function Login({ setUser, setSecret }: LoginProps) {
+const Login = ({ setUser, setSecret }: LoginProps) => {
   const [isRegister, setIsRegister] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,7 +28,8 @@ function Login({ setUser, setSecret }: LoginProps) {
       setUser(username);
       setSecret(password);
     }
-  }, [resultLogin.data]);
+  }, [resultLogin.data]); //eslint-disable-line
+  console.log(resultLogin);
 
   return (
     <div className="login-page">
@@ -47,13 +48,15 @@ function Login({ setUser, setSecret }: LoginProps) {
             type="text"
             placeholder="Username"
             value={username}
-            onChange={(e) => setUsername(e.target.value)} />
+            onChange={(e) => setUsername(e.target.value)}
+          />
           <input
             className="login-input"
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)} />
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
         <div className="login-actions">
@@ -70,6 +73,6 @@ function Login({ setUser, setSecret }: LoginProps) {
       </div>
     </div>
   );
-}
+};
 
 export default Login;

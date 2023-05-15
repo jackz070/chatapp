@@ -6,13 +6,26 @@ import {
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 
+interface Props {
+  setAttachment: React.Dispatch<React.SetStateAction<File | null>>;
+  message: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: () => Promise<void>;
+}
+
 const MessageFormUi = ({
   setAttachment,
   message,
   handleChange,
   handleSubmit,
-}) => {
+}: Props) => {
   const [preview, setPreview] = useState("");
+  const handleSubmitWithChecks = () => {
+    if (message) {
+      setPreview("");
+      handleSubmit();
+    }
+  };
 
   return (
     <div className="message-form-container">
@@ -28,7 +41,7 @@ const MessageFormUi = ({
             className="message-form-icon-x"
             onClick={() => {
               setPreview("");
-              setAttachment("");
+              setAttachment(null);
             }}
           />
         </div>
@@ -41,6 +54,11 @@ const MessageFormUi = ({
             value={message}
             onChange={handleChange}
             placeholder="Send a message..."
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmitWithChecks();
+              }
+            }}
           />
         </div>
         <div className="message-form-icons">
@@ -67,8 +85,7 @@ const MessageFormUi = ({
           <PaperAirplaneIcon
             className="message-form-icon-airplane"
             onClick={() => {
-              setPreview("");
-              handleSubmit();
+              handleSubmitWithChecks();
             }}
           />
         </div>

@@ -1,29 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
 
-$gray-300: #a3a3a3;
-$gray-400: #858585;
-$primary-400: #35596c;
-$primary-500: #0f2936;
-$primary-600: #091d2b;
-$primary-700: #051926;
-$primary-800: #060f14;
-$secondary-300: #7ac5d7;
-$secondary-500: #219ebc;
-$secondary-800: #00b5e0;
-$tertiary-50: #fff8e6;
-$tertiary-100: #fff1cd;
-$quaternary-500: #fb8500;
+$white: #fdfaf6;
+$black: #000000;
+$gray-lighter: #ecebe9;
+$gray-darker: #d6d6d6;
+$gray-darkest: #a3a3a3;
+$blue-lighter: #0a84ff;
+$blue-darker: #004e98;
+$blue-darkest: #133d67;
+$orange-accent: #ff6700;
 
 html,
 body,
 #root,
 .app {
-  height: 100%;
+  height: 100vh;
+  overflow: hidden;
   width: 100%;
   margin: 0;
   padding: 0;
 
-  font-family: "Rubik", sans-serif;
+  font-family: "PT Sans", sans-serif;
 }
 
 .layout {
@@ -31,8 +28,14 @@ body,
   display: flex;
 }
 
+h2 {
+  margin: 0.75rem 0;
+  line-height: 1;
+  font-size: 2.5rem;
+}
+
 .servers {
-  background-color: $primary-500;
+  background-color: $white;
 }
 
 .flexbetween {
@@ -47,23 +50,61 @@ body,
   height: 15px !important;
 }
 
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottomOpacity {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .login-page {
-  background-color: $primary-500;
+  background-color: $white;
   height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  animation: 1s ease-out 0s 1 slideInFromBottom;
 }
 
 .login-container {
-  color: $tertiary-50;
+  color: $black;
 }
 
 .login-actions {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+}
+
+.login-actions button {
+  display: flex;
+  justify-content: center;
+  background-color: $blue-lighter;
+  color: $white;
+  width: 96px;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+  border-radius: 4px;
+}
+
+.login-actions button:hover {
+  filter: brightness(1.1);
 }
 
 .login-input {
@@ -73,26 +114,38 @@ body,
   border: none;
   border-radius: 5px;
   padding: 0 10px;
-  margin: 10px 0;
-  background-color: $primary-600;
-  color: $tertiary-50;
+  margin: 8px 0;
+  background-color: $gray-lighter;
+  color: $black;
+}
+
+.login-input:last-child {
+  margin-bottom: 16px;
+}
+
+input:-internal-autofill,
+input:-internal-autofill-selected {
+  background-color: $gray-darker !important;
 }
 
 .register-change {
   text-decoration: underline;
-  color: $secondary-500;
+  color: $blue-lighter;
+  width: fit-content;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 
 .register-change:hover {
   text-decoration: underline;
-  color: $tertiary-100;
-  cursor: pointer;
+  filter: brightness(1.25);
 }
 
 /* Chat Styling */
 .ce-chat-engine {
-  color: $tertiary-50 !important;
-  font-family: "Rubik" !important;
+  color: $black !important;
+  font-family: "PT Sans", sans-serif !important;
 }
 
 /* Chat List */
@@ -105,7 +158,7 @@ body,
 
 .horizontal-rule {
   margin: 15px 0px !important;
-  border: 0.5px solid $primary-400 !important;
+  border: 0.5px solid $blue-darkest !important;
 }
 
 .list-category {
@@ -114,18 +167,18 @@ body,
   gap: 15px;
   font-size: 16px !important;
   font-weight: 300 !important;
-  color: $gray-400 !important;
+  color: $black !important;
   padding: 0px 25px !important;
 }
 
 .category-icon {
-  color: $gray-400 !important;
+  color: $black !important;
   width: 25px !important;
   height: 25px !important;
 }
 
 .icon {
-  color: $tertiary-50 !important;
+  color: $black !important;
   width: 25px !important;
   height: 25px !important;
 }
@@ -148,7 +201,7 @@ body,
   position: absolute;
   top: 0;
   right: 0;
-  color: $primary-500 !important;
+  color: $white !important;
   width: 15px !important;
   height: 15px !important;
   cursor: pointer;
@@ -167,7 +220,7 @@ body,
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  border: 1px solid $primary-400 !important;
+  border: 1px solid $gray-lighter !important;
   border-radius: 5px !important;
   padding: 5px 15px 5px 20px !important;
   background: none;
@@ -192,8 +245,8 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  color: $tertiary-50 !important;
-  z-index: 2 !important;
+  color: $black !important;
+
   width: 100% !important;
 }
 
@@ -203,27 +256,33 @@ body,
   position: absolute;
   top: 0;
   left: 0;
-  color: $gray-300 !important;
+  color: $gray-lighter !important;
   // background: transparent;
   z-index: 1;
 }
 
 .message-form-icon-airplane {
-  color: $secondary-500 !important;
+  color: $blue-lighter !important;
   width: 25px !important;
   height: 25px !important;
+  transition: all 0.3s ease;
 }
 
-.message-form-icon-clip:hover,
+.message-form-icon-clip:hover {
+  color: $blue-lighter !important;
+  cursor: pointer;
+}
+
 .message-form-icon-airplane:hover {
-  color: $secondary-800 !important;
+  color: $blue-darker !important;
   cursor: pointer;
 }
 
 .message-form-icon-clip {
-  color: $primary-400 !important;
+  color: $gray-darker !important;
   width: 21px !important;
   height: 21px !important;
+  transition: all 0.3s ease;
 }
 
 .message-form-icons {
@@ -235,7 +294,7 @@ body,
 
 .vertical-line {
   height: 18px;
-  border: 0.5px solid $primary-400 !important;
+  border: 0.5px solid $gray-lighter !important;
   display: inline-block;
 }
 
@@ -246,21 +305,28 @@ body,
 
 .header-text {
   margin: 10px 0 !important;
+
+  @media screen and (max-width: 950px) {
+    margin: 2px 0 !important;
+  }
 }
 
 .ce-chat-list-column {
-  background-color: $primary-600 !important;
+  background-color: $white !important;
   overflow-y: hidden !important;
-  border-right: 1px solid $primary-400 !important;
+  border-right: 1px solid $gray-lighter !important;
+  @media screen and (max-width: 575px) {
+    height: 0 !important;
+  }
 }
 
 .ce-chat-form {
-  background-color: $primary-600 !important;
+  background-color: $white !important;
 }
 
 .ce-chat-form-title {
   top: 20px !important;
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
   font-weight: bold !important;
   font-size: 24px !important;
 }
@@ -268,13 +334,14 @@ body,
 .ce-chat-form-button {
   border: none !important;
   border-radius: 33px !important;
-  color: $primary-600 !important;
+  color: $white !important;
+  background-color: $blue-lighter !important;
   padding: 4px 15px !important;
   top: 15px !important;
 }
 
 .ce-chat-list {
-  background-color: $primary-600 !important;
+  background-color: $white !important;
 }
 
 .ce-chat-card {
@@ -282,32 +349,51 @@ body,
   padding: 0px 20px !important;
 }
 
+.ce-chat-card:hover {
+  background-color: $gray-lighter !important;
+}
+
 .ce-chat-card-title {
   top: 16px !important;
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
 }
 
 .ce-chat-card-subtitle {
   bottom: 16px !important;
-  color: $tertiary-100 !important;
-  font-family: "Rubik" !important;
+  color: $black !important;
+  font-family: "PT Sans" !important;
   font-weight: 300 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.ce-chat-card-title-html {
 }
 
 .ce-chat-card-time-stamp {
   bottom: 16px !important;
-  color: $gray-300 !important;
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
+  color: $gray-darker !important;
+  font-size: 0.65rem !important;
   right: 16px !important;
 }
 
 .ce-active-chat-card {
-  background-color: $secondary-800 !important;
-  color: $tertiary-100 !important;
+  background-color: $gray-darker !important;
+  color: $black !important;
+}
+
+.ce-active-chat-card:hover {
+  background-color: $gray-darker !important;
+}
+
+.ce-active-chat-card .ce-chat-card-time-stamp {
+  color: $black !important;
 }
 
 .ce-chat-card-unread {
-  background-color: $quaternary-500 !important;
+  background-color: $orange-accent !important;
   right: 16px !important;
 }
 
@@ -322,7 +408,7 @@ body,
 }
 
 .ce-chat-feed {
-  background-color: $primary-700 !important;
+  background-color: $white !important;
 }
 
 .chat-header {
@@ -330,27 +416,36 @@ body,
   align-items: center;
   justify-content: space-between;
   padding: 10px 30px !important;
-  border-bottom: 1px solid $primary-400 !important;
+  border-bottom: 1px solid $gray-lighter !important;
+
+  @media screen and (max-width: 950px) {
+    flex-direction: column;
+  }
+}
+
+.chat-header p {
+  font-size: 0.7rem;
 }
 
 .ce-chat-header-title {
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
   left: 68px !important;
 }
 
 .ce-chat-header-subtitle {
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
+  font-size: 0.75rem;
 }
 
 .ce-chat-header {
-  background-color: $primary-700 !important;
-  color: $tertiary-50 !important;
-  border-bottom: 1px solid $primary-400 !important;
+  background-color: $white !important;
+  color: $black !important;
+  border-bottom: 1px solid $gray-lighter !important;
   padding: 10px !important;
 }
 
 .ce-avatar-dot {
-  background-color: $secondary-500 !important;
+  background-color: $blue-lighter !important;
   margin: 5px 0 !important;
 }
 
@@ -360,7 +455,7 @@ body,
 }
 
 #ce-send-message-button {
-  background-color: $secondary-300 !important;
+  background-color: $white !important;
   padding: 3px 10px !important;
   bottom: 5px !important;
 }
@@ -370,22 +465,28 @@ body,
   border: none !important;
 }
 
+.ce-chat-form-input {
+  width: calc(100% - 22px) !important;
+  height: 38px !important;
+  left: 10px !important;
+}
+
 .ce-message-list {
-  background-color: $primary-800 !important;
+  background-color: $white !important;
   height: calc((100% - 100px) - 68px) !important;
-  border-bottom: 1px solid $primary-400 !important;
+  border-bottom: 1px solid $gray-lighter !important;
 }
 
 .ce-message-list::-webkit-scrollbar-track {
-  background: $primary-800;
+  background: $white;
 }
 
 .ce-message-list::-webkit-scrollbar-thumb {
-  background: $primary-800;
+  background: $white;
 }
 
 .ce-message-list::-webkit-scrollbar-track:hover {
-  background: $primary-800;
+  background: $white;
 }
 
 .ce-message-list-content {
@@ -394,68 +495,79 @@ body,
 }
 
 .ce-message-date-text {
-  font-family: "Rubik" !important;
-  color: $gray-300 !important;
+  font-family: "PT Sans" !important;
+  color: $gray-darker !important;
   font-size: 12px !important;
   margin: 10px 0 !important;
 }
 
 .ce-message-form {
-  background-color: $primary-700 !important;
-  border: 1px solid $primary-400 !important;
+  background-color: $white !important;
+  border: 1px solid $gray-lighter !important;
   border-radius: 5px !important;
   margin: 20px !important;
   width: calc(100% - 40px) !important;
 }
 
 .ce-message-form-input {
-  background-color: $primary-700 !important;
-  color: $tertiary-50 !important;
-  font-family: "Rubik" !important;
+  background-color: $white !important;
+  color: $black !important;
+  font-family: "PT Sans" !important;
   border: none !important;
 }
 
 .ce-my-message-body {
-  font-family: "Rubik" !important;
-  background-color: $secondary-500 !important;
-  color: $tertiary-50 !important;
+  font-family: "PT Sans" !important;
+  color: $white !important;
+  background-color: $blue-lighter !important;
   border-radius: 8px !important;
   font-size: 14px !important;
+  padding: 6px 12px !important;
+  min-height: 18px !important;
+  cursor: text !important;
 }
 
 .ce-their-message-body {
-  font-family: "Rubik" !important;
-  background-color: $gray-300 !important;
-  color: $tertiary-50 !important;
+  font-family: "PT Sans" !important;
+  background-color: $gray-lighter !important;
+  color: $black !important;
   border-radius: 8px !important;
   font-size: 14px !important;
+  padding: 6px 12px !important;
+  margin-left: 56px !important;
+  cursor: text !important;
 }
 
 .ce-my-message-timestamp {
-  color: $tertiary-50 !important;
-  font-family: "Rubik" !important;
+  color: $black !important;
+  font-family: "PT Sans" !important;
+  cursor: default !important;
+  user-select: none;
 }
 
 .ce-their-message-timestamp {
-  color: $tertiary-50 !important;
-  font-family: "Rubik" !important;
+  color: $black !important;
+  font-family: "PT Sans" !important;
+  cursor: default !important;
+  user-select: none;
 }
 
 .ce-their-message-sender-username {
-  padding-left: 50px !important;
-  color: $tertiary-50 !important;
-  font-family: "Rubik" !important;
+  padding-left: 60px !important;
+  color: $gray-darkest !important;
+  font-family: "PT Sans" !important;
+  font-size: 0.75rem !important;
 }
 
 /* Chat Settings */
 .ce-chat-settings-column {
-  background-color: $primary-500;
-  border-left: 1px solid $primary-400 !important;
+  background-color: $white;
+  border-left: 1px solid $gray-lighter !important;
   overflow-y: hidden !important;
 }
 
 .ce-chat-settings {
-  background-color: $primary-600 !important;
+  background-color: $white !important;
 }
 
 .ce-chat-avatars {
@@ -463,29 +575,33 @@ body,
 }
 
 .ce-chat-avatars .ce-avatar {
-  width: 40px !important;
-  height: 40px !important;
+  height: 32px !important;
+  width: 32px !important;
 }
 
-.ce-avatar {
-  background-color: $secondary-500 !important;
+.ce-chat-settings-column .ce-avatar {
+  background-color: $blue-lighter !important;
+  height: 32px !important;
+  width: 32px !important;
+
+  font-size: 0.75rem !important;
 }
 
 .ce-avatar-status {
-  background-color: $secondary-800 !important;
+  background-color: $blue-lighter !important;
 }
 
 .ce-chat-settings-title {
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
   padding: 20px 0 0 0 !important;
-  border-top: 1px solid $primary-400 !important;
+  border-top: 1px solid $gray-lighter !important;
 }
 
 .ce-dropdown {
-  color: $tertiary-50 !important;
-  background-color: $primary-600 !important;
+  color: $black !important;
+  background-color: $white !important;
   border-top: none !important;
-  font-family: "Rubik" !important;
+  font-family: "PT Sans" !important;
 }
 
 .ce-dropdown-icon {
@@ -494,9 +610,9 @@ body,
 
 .ce-dropdown-label {
   padding: 30px 25px 10px 25px !important;
-  color: $gray-400 !important;
-  background-color: $primary-600 !important;
-  font-family: "Rubik" !important;
+  color: $black !important;
+  background-color: $white !important;
+  font-family: "PT Sans" !important;
   font-weight: 300 !important;
   font-size: 14px !important;
 }
@@ -504,30 +620,58 @@ body,
 .ce-dropdown-children {
   margin: 10px 0 !important;
   padding: 0 13px !important;
+  font-size: 0.75rem !important;
+}
+
+.ce-dropdown-children
+  > div:not(
+    .ce-avatar-status,
+    .ce-avatar,
+    .ce-autocomplete,
+    #ce-settings-photos-dropdown *
+  ) {
+  height: 42px !important;
 }
 
 .ce-member-delete-button {
   border-radius: 5px !important;
-  background-color: $primary-800 !important;
-  color: $primary-400 !important;
-  border: 1px solid $primary-400 !important;
+  background-color: $white !important;
+  color: $gray-lighter !important;
+  border: 1px solid $gray-lighter !important;
   top: 6px !important;
 }
 
 .ce-autocomplete-input {
-  margin: 10px 0 !important;
-  background-color: $primary-800 !important;
-  color: $tertiary-50 !important;
-  font-family: "Rubik" !important;
-  border: 1px solid $primary-400 !important;
+  margin: 8px 0 !important;
+  background-color: $white !important;
+  color: $black !important;
+  font-family: "PT Sans" !important;
+  border: 1px solid $gray-lighter !important;
   border-radius: 5px !important;
+  font-size: 0.75rem !important;
 }
 
-.ce-danger-button {
-  border-radius: 5px !important;
-  background-color: $primary-800 !important;
-  color: $primary-400 !important;
-  border: 1px solid $primary-400 !important;
+.ce-member-delete-button {
+  border-radius: 50px !important;
+  height: 28px !important;
+  width: 28px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: $white !important;
+  color: $gray-darker !important;
+  border: 1px solid $gray-darker !important;
+  padding: 0 !important;
+}
+
+.ce-danger-button:hover {
+  color: $gray-darkest !important;
+  border: 1px solid $gray-darkest !important;
+}
+
+.ce-danger-button svg {
+  height: 15px !important;
+  width: 16px !important;
 }
 
 #ce-settings-photos-dropdown .ce-dropdown-children {
@@ -540,13 +684,13 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-  background: $primary-700;
+  background: $white;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $primary-700;
+  background: $white;
 }
 
 ::-webkit-scrollbar-track:hover {
-  background: $primary-700;
+  background: $white;
 }

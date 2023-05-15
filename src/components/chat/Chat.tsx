@@ -1,14 +1,12 @@
-import React from "react";
 import {
   useMultiChatLogic,
   MultiChatSocket,
   MultiChatWindow,
-  ChatHeaderProps,
 } from "react-chat-engine-advanced";
 import Header from "../customHeader/Header";
 import StandardMessageForm from "../customMessageForms/StandardMessageForm";
 import Ai from "../customMessageForms/Ai";
-import AiCode from "../customMessageForms/AiCode";
+import { useEffect } from "react";
 
 interface ChatProps {
   user: string;
@@ -22,6 +20,22 @@ const Chat = ({ user, secret }: ChatProps) => {
     secret
   );
 
+  const messageHistory = [];
+  useEffect(() => {
+    if (chatProps && chatProps.chat?.title.startsWith("AiChat_")) {
+      chatProps?.messages?.forEach((message) => {
+        const formattedMessage = {
+          role: message.sender_username.includes("AI_bot")
+            ? "assistant"
+            : "user",
+          content: message.text,
+        };
+        messageHistory.unshift(formattedMessage);
+      });
+    }
+    console.log(messageHistory);
+  }, [chatProps]);
+
   return (
     <div style={{ flexBasis: "100%" }}>
       <MultiChatSocket {...chatProps} />
@@ -31,14 +45,24 @@ const Chat = ({ user, secret }: ChatProps) => {
         renderChatHeader={(chat) => <Header chat={chat} />}
         renderMessageForm={(props) => {
           if (chatProps.chat?.title.startsWith("AiChat_")) {
-            return <Ai props={props} activeChat={chatProps.chat} />;
+            return (
+              <Ai
+                props={props}
+                activeChat={chatProps.chat}
+                messageHistory={messageHistory}
+              />
+            );
           }
-          if (chatProps.chat?.title.startsWith("AiCode_")) {
-            return <AiCode props={props} activeChat={chatProps.chat} />;
+          if (chatProps.chat) {
+            return (
+              <StandardMessageForm
+                props={props}
+                isChatFeedLoading={chatProps.isChatFeedLoading}
+                activeChat={chatProps.chat}
+              />
+            );
           }
-          return (
-            <StandardMessageForm props={props} activeChat={chatProps.chat} />
-          );
+          return <></>;
         }}
       />
     </div>
