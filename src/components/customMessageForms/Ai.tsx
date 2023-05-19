@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import MessageFormUi from "./MessageFormUi";
 import { usePostAiTextMutation } from "../../state/api";
-import { CustomChatFormProps } from "./CustomChatFormProps";
+import { CustomChatFormPropsWithMessageHistory } from "./CustomChatFormProps";
 import { MessageObject } from "react-chat-engine-advanced";
 
-const Ai = ({ props, activeChat, messageHistory }: CustomChatFormProps) => {
+const Ai = ({
+  props,
+  activeChat,
+  messageHistory,
+}: CustomChatFormPropsWithMessageHistory) => {
   const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
   const [trigger] = usePostAiTextMutation();

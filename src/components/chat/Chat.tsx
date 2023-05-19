@@ -13,6 +13,11 @@ interface ChatProps {
   secret: string;
 }
 
+export interface MessageHistoryMessage {
+  role: "user" | "system" | "assistant";
+  content: string | null;
+}
+
 const Chat = ({ user, secret }: ChatProps) => {
   const chatProps = useMultiChatLogic(
     import.meta.env.VITE_PROJECT_ID,
@@ -20,11 +25,12 @@ const Chat = ({ user, secret }: ChatProps) => {
     secret
   );
 
-  const messageHistory = [];
+  const messageHistory: MessageHistoryMessage[] = [];
+
   useEffect(() => {
     if (chatProps && chatProps.chat?.title.startsWith("AiChat_")) {
       chatProps?.messages?.forEach((message) => {
-        const formattedMessage = {
+        const formattedMessage: MessageHistoryMessage = {
           role: message.sender_username.includes("AI_bot")
             ? "assistant"
             : "user",
@@ -33,7 +39,6 @@ const Chat = ({ user, secret }: ChatProps) => {
         messageHistory.unshift(formattedMessage);
       });
     }
-    console.log(messageHistory);
   }, [chatProps]);
 
   return (
@@ -55,11 +60,7 @@ const Chat = ({ user, secret }: ChatProps) => {
           }
           if (chatProps.chat) {
             return (
-              <StandardMessageForm
-                props={props}
-                isChatFeedLoading={chatProps.isChatFeedLoading}
-                activeChat={chatProps.chat}
-              />
+              <StandardMessageForm props={props} activeChat={chatProps.chat} />
             );
           }
           return <></>;

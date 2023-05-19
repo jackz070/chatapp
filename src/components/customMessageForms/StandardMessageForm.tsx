@@ -3,13 +3,15 @@ import MessageFormUi from "./MessageFormUi";
 import { CustomChatFormProps } from "./CustomChatFormProps";
 import { MessageObject } from "react-chat-engine-advanced";
 
-const StandardMessageForm = ({ props, activeChat, isChatFeedLoading }: CustomChatFormProps) => {
+const StandardMessageForm = ({
+  props,
+  activeChat,
+}: CustomChatFormProps) => {
   const [message, setMessage] = useState("");
   const [attachment, setAttachment] = useState<File | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setMessage(e.target.value);
-
 
   const handleSubmit = async () => {
     const date = new Date()

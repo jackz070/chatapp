@@ -18,6 +18,7 @@ const MessageFormUi = ({
   message,
   handleChange,
   handleSubmit,
+
 }: Props) => {
   const [preview, setPreview] = useState("");
   const handleSubmitWithChecks = () => {
